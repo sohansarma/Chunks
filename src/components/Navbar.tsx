@@ -1,18 +1,22 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Upload, Link } from "lucide-react";
+import { LayoutDashboard, Upload, Link, Users, LogOut } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "./ui/button";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const { isAdmin, signOut } = useAuth();
+
   const navItems = [
     { to: "/", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/uploads", icon: Upload, label: "Uploads" },
     { to: "/connections", icon: Link, label: "Connections" },
+    ...(isAdmin ? [{ to: "/users", icon: Users, label: "Users" }] : []),
   ];
 
   return (
     <nav className="bg-white w-64 h-full shadow-lg">
       <div className="p-4">
-        <h1 className="text-2xl font-bold text-gray-800">Simply Load</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Social Analytics</h1>
       </div>
       <ul className="space-y-2 p-4">
         {navItems.map((item) => (
@@ -33,6 +37,16 @@ const Navbar: React.FC = () => {
           </li>
         ))}
       </ul>
+      <div className="p-4 mt-auto">
+        <Button
+          variant="outline"
+          className="w-full flex items-center justify-center gap-2"
+          onClick={() => signOut()}
+        >
+          <LogOut className="w-4 h-4" />
+          Sign Out
+        </Button>
+      </div>
     </nav>
   );
 };
