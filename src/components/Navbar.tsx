@@ -14,11 +14,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-white w-64 h-full shadow-lg">
+    <nav className="bg-white w-64 h-full shadow-lg flex flex-col">
       <div className="p-4">
-        <h1 className="text-2xl font-bold text-gray-800">Social Analytics</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Simpli Load</h1>
       </div>
-      <ul className="space-y-2 p-4">
+      <ul className="space-y-2 p-4 flex-grow">
         {navItems.map((item) => (
           <li key={item.to}>
             <NavLink
@@ -37,7 +37,7 @@ const Navbar = () => {
           </li>
         ))}
       </ul>
-      <div className="p-4 mt-auto">
+      <div className="p-4">
         <Button
           variant="outline"
           className="w-full flex items-center justify-center gap-2"
