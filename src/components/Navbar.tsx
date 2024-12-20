@@ -10,7 +10,7 @@ const Navbar = () => {
     { to: "/", icon: LayoutDashboard, label: "Dashboard" },
     { to: "/uploads", icon: Upload, label: "Uploads" },
     { to: "/connections", icon: Link, label: "Connections" },
-    ...(isAdmin ? [{ to: "/users", icon: Users, label: "Users" }] : []),
+    { to: "/users", icon: Users, label: "Users" },
   ];
 
   return (

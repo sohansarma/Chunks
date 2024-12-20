@@ -22,34 +22,18 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signIn(email, password);
+    signIn();
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Welcome back</CardTitle>
+          <CardTitle>Good to see you here!</CardTitle>
           <CardDescription>Sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="space-y-2">
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
             <Button type="submit" className="w-full">
               Sign In
             </Button>
