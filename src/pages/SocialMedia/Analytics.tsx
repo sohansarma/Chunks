@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "@/ui/button";
 import { BarChart, TableIcon, Grid } from "lucide-react";
-import GraphView from "@/components/dashboard/GraphView";
-import TableView from "@/components/dashboard/TableView";
-import CardView from "@/components/dashboard/CardView";
+import GraphView from "@/components/analytics/GraphView";
+import TableView from "@/components/analytics/TableView";
+import CardView from "@/components/analytics/CardView";
 
 type ViewType = "graph" | "table" | "card";
 

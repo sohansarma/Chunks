@@ -14,7 +14,7 @@ interface Ticket {
   status: "todo" | "inProgress" | "done";
 }
 
-const Projects = () => {
+const Tasks = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [newTicket, setNewTicket] = useState({ title: "", description: "" });
   const [isAddingTicket, setIsAddingTicket] = useState(false);
@@ -67,7 +67,7 @@ const Projects = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Project Board</h2>
+        <h2 className="text-2xl font-bold">Task Board</h2>
         <Button onClick={() => setIsAddingTicket(true)}>
           <Plus className="h-4 w-4 mr-2" />
           Add Ticket
@@ -195,4 +195,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default Tasks;

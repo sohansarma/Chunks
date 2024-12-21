@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import QueryEditor from "@/pages/Techies/QueryEditor";
-import Projects from "@/pages/Techies/Projects";
+import Tasks from "@/pages/Techies/Tasks";
 import Notes from "@/pages/Techies/Notes";
 
 export const AdminRoutes = () => [
@@ -78,11 +78,11 @@ export const AdminRoutes = () => [
         component: <QueryEditor />,
       },
       {
-        to: "projects",
+        to: "tasks",
         icon: Kanban,
-        label: "Projects",
+        label: "Tasks",
         roles: [USER_ROLES.ADMIN],
-        component: <Projects />,
+        component: <Tasks />,
       },
       {
         to: "notes",
