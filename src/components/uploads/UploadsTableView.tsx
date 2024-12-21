@@ -5,7 +5,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/ui/table";
 import { PlatformStatsDialog } from "./PlatformStatsDialog";
 import { Upload } from "@/types/uploads";
 import { getAccumulatedStats } from "@/utils/uploads";

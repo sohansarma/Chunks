@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/ui/button";
+import { Input } from "@/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { Navigate } from "react-router-dom";
 import { toast } from "sonner";
 import TableView from "@/components/userManagement/TableView";
@@ -12,7 +11,6 @@ export default function UserManagement() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [users, setUsers] = useState<any>();
-  const { isAdmin } = useAuth();
 
   // if (!isAdmin) {
   //   return <Navigate to="/" replace />;

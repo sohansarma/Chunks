@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/ui/button";
 import { BarChart, TableIcon, Grid } from "lucide-react";
 import GraphView from "@/components/dashboard/GraphView";
 import TableView from "@/components/dashboard/TableView";
@@ -7,7 +7,7 @@ import CardView from "@/components/dashboard/CardView";
 
 type ViewType = "graph" | "table" | "card";
 
-const Dashboard: React.FC = () => {
+const Analytics: React.FC = () => {
   const [viewType, setViewType] = useState<ViewType>("graph");
 
   const renderView = () => {
@@ -26,7 +26,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Dashboard</h2>
+        <h2 className="text-2xl font-bold">Analytics</h2>
         <div className="flex justify-end space-x-2">
           <Button
             variant={viewType === "graph" ? "default" : "outline"}
@@ -56,4 +56,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Analytics;

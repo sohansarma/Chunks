@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { PlatformStatsDialog } from "./PlatformStatsDialog";
 import { Upload } from "@/types/uploads";
 import { getAccumulatedStats } from "@/utils/uploads";

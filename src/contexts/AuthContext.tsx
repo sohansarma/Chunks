@@ -1,54 +1,95 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { Auth0Provider, useAuth0 } from "@auth0/auth0-react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+// import { setInterceptors, setHeader } from '../api/interceptor';
+import { createContext, useEffect, useMemo, useState } from "react";
 
-interface AuthContextType {
-  user: any;
-  loading: boolean;
-  signIn: () => void;
-  signOut: () => void;
-  isAdmin: boolean;
-}
+export type UserAuthInfo = {
+  token: string;
+  user?: any;
+  id?: string;
+  syndicateType?: string;
+  permalink?: string;
+  refreshToken?: string;
+};
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export type AuthContextProps = {
+  authState: UserAuthInfo;
+  isUserAuthenticated: Function;
+  isAuthLoading: boolean;
+  setUserSession: Function;
+  getUserSession: Function;
+};
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { user, isLoading, loginWithRedirect, logout } = useAuth0();
-  const [isAdmin, setIsAdmin] = useState(false);
-  const navigate = useNavigate();
+export const AuthContext = createContext<AuthContextProps>(
+  {} as AuthContextProps
+);
 
-  useEffect(() => {
-    if (user) {
-      setIsAdmin(
-        user["https://your-app.com/roles"]?.includes("admin") || false
-      );
-    }
-  }, [user]);
-  const signIn = () => {
-    loginWithRedirect();
-  };
+export const AuthContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [authState, setAuthState] = useState<UserAuthInfo>({} as UserAuthInfo);
 
-  const signOut = () => {
-    logout({
-      logoutParams: {
-        returnTo: `${window.location.origin}`,
-      },
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
+
+  const setUserSession = (
+    token: string,
+    user: any,
+    id: string,
+    syndicateType: string,
+    permalink: string,
+    refreshToken: string
+  ) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("syndicate_id", id);
+    localStorage.setItem("syndicate_type", syndicateType);
+    localStorage.setItem("syndicate_permalink", permalink);
+    localStorage.setItem("refreshToken", refreshToken);
+    setAuthState({
+      token,
+      user: JSON.stringify(user),
+      id,
+      syndicateType,
+      permalink,
+      refreshToken,
     });
   };
 
-  return (
-    <AuthContext.Provider
-      value={{ user, loading: isLoading, signIn, signOut, isAdmin }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const getUserSession = (): UserAuthInfo => {
+    const token = localStorage.getItem("token") as string;
+    const user = localStorage.getItem("user");
+    const id = localStorage.getItem("syndicate_id") as string;
+    const syndicateType = localStorage.getItem("syndicate_type") as string;
+    const permalink = localStorage.getItem("syndicate_permalink") as string;
+    const refreshToken = localStorage.getItem("refreshToken") as string;
+    return { token, user, id, syndicateType, permalink, refreshToken };
+  };
+
+  useEffect(() => {
+    const token = getUserSession();
+    if (Object.keys(token)?.length) {
+      setAuthState(token);
+    }
+    setIsAuthLoading(false);
+  }, []);
+
+  const isUserAuthenticated = () => {
+    const token = localStorage.getItem("token");
+    return !!token;
+  };
+
+  const stateValues = useMemo(
+    () => ({
+      authState,
+      isUserAuthenticated,
+      isAuthLoading,
+      setUserSession,
+      getUserSession,
+    }),
+    [isAuthLoading, authState]
   );
-}
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+
+  return (
+    <AuthContext.Provider value={stateValues}>{children}</AuthContext.Provider>
+  );
 };

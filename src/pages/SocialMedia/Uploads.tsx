@@ -5,8 +5,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
+} from "@/ui/select";
+import { Button } from "@/ui/button";
 import { LayoutGrid, List } from "lucide-react";
 import { UploadsCardView } from "@/components/uploads/UploadsCardView";
 import { UploadsTableView } from "@/components/uploads/UploadsTableView";

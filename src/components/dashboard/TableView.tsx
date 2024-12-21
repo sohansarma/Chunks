@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/ui/table";
 
 const data = [
   { platform: "Instagram", followers: 4000, engagement: 2400, posts: 120 },

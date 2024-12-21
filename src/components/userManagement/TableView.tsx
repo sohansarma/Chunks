@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/ui/table";
 
 const data = [{ id: 1, name: "Sohan", email: "sohan.sarma@gmail.com" }];
 
