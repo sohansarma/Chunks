@@ -47,6 +47,7 @@ const UserLoginRedirection = () => {
     try {
       if (isAuthenticated) {
         localStorage.setItem("token", updatedAccessToken);
+
         navigate("/");
       }
     } catch (error: any) {

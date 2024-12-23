@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { Button } from "@/ui/button";
 import { Input } from "@/ui/input";
 import { Textarea } from "@/ui/textarea";
-import { Pin, Edit2, Trash2 } from "lucide-react";
+import { Pin, Edit2, Trash2, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 
 interface Note {
@@ -17,6 +17,7 @@ const Notes = () => {
   const [notes, setNotes] = useState<Note[]>([]);
   const [newNote, setNewNote] = useState({ title: "", content: "" });
   const [editingNote, setEditingNote] = useState<Note | null>(null);
+  const [isAddingNote, setIsAddingNote] = useState(false);
 
   const addNote = () => {
     if (!newNote.title || !newNote.content) {
@@ -62,27 +63,45 @@ const Notes = () => {
 
   return (
     <div className="p-6 space-y-6">
-      <div className="space-y-4">
+      <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Notes</h2>
-
-        <div className="space-y-4">
-          <Input
-            placeholder="Note Title"
-            value={newNote.title}
-            onChange={(e) =>
-              setNewNote((prev) => ({ ...prev, title: e.target.value }))
-            }
-          />
-          <Textarea
-            placeholder="Note Content"
-            value={newNote.content}
-            onChange={(e) =>
-              setNewNote((prev) => ({ ...prev, content: e.target.value }))
-            }
-          />
-          <Button onClick={addNote}>Create Note</Button>
-        </div>
+        <Button onClick={() => setIsAddingNote(true)}>
+          <Plus className="h-4 w-4 mr-2" />
+          Add Ticket
+        </Button>
       </div>
+
+      {isAddingNote && (
+        <Card className="mb-6">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">New Note</CardTitle>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsAddingNote(false)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Input
+              placeholder="Note Title"
+              value={newNote.title}
+              onChange={(e) =>
+                setNewNote((prev) => ({ ...prev, title: e.target.value }))
+              }
+            />
+            <Textarea
+              placeholder="Note Content"
+              value={newNote.content}
+              onChange={(e) =>
+                setNewNote((prev) => ({ ...prev, content: e.target.value }))
+              }
+            />
+            <Button onClick={addNote}>Create Note</Button>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sortedNotes.map((note) => (

@@ -13,11 +13,14 @@ import {
   Share2,
   StickyNote,
   Kanban,
+  Newspaper,
 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import QueryEditor from "@/pages/Techies/QueryEditor";
 import Tasks from "@/pages/Techies/Tasks";
 import Notes from "@/pages/Techies/Notes";
+import TechNews from "@/pages/Techies/News";
+import Dashboard from "@/pages/Dashboard";
 
 export const AdminRoutes = () => [
   {
@@ -25,7 +28,7 @@ export const AdminRoutes = () => [
     label: "Dashboard",
     id: "dashboard",
     icon: LayoutDashboard,
-    component: <Outlet />,
+    component: <Dashboard />,
     roles: [USER_ROLES.ADMIN],
   },
   {
@@ -90,6 +93,13 @@ export const AdminRoutes = () => [
         label: "Notes",
         roles: [USER_ROLES.ADMIN],
         component: <Notes />,
+      },
+      {
+        to: "news",
+        icon: Newspaper,
+        label: "News",
+        roles: [USER_ROLES.ADMIN],
+        component: <TechNews />,
       },
     ],
   },
